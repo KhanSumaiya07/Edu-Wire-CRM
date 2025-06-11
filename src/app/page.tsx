@@ -7,11 +7,7 @@ export default function Home() {
   return (
     
       <div className='main-pages-container'>
-        {isLogin ? (
-          <LoginForm onSwitchToRegister={() => setIsLogin(false)} />
-        ) : (
-          <RegisterForm onSwitchToLogin={() => setIsLogin(true)} />
-        )}
+       <RegisterForm/>
       </div>
    
   );

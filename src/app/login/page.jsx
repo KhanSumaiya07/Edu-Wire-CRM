@@ -4,8 +4,10 @@ import { useState } from "react"
 import { Mail, Eye, EyeOff, ArrowRight } from "lucide-react"
 import { AuthInput } from "@/components/ui/authInput/authInput"
 import styles from "./style.module.css"
+import { useRouter } from "next/navigation";
 
-export default function LoginForm({ onSwitchToRegister }) {
+export default function LoginForm() {
+  const router = useRouter(); // initialize router
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
@@ -76,7 +78,7 @@ export default function LoginForm({ onSwitchToRegister }) {
           <div className={styles.footer}>
             <p className={styles.footerText}>
               Don't have an account?{" "}
-              <span onClick={onSwitchToRegister} className={styles.switchLink}>
+              <span onClick={() => router.push("/register")} className={styles.switchLink}>
                 Sign up
               </span>
             </p>
