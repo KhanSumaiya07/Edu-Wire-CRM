@@ -1,25 +1,16 @@
+// src/middleware.js
 import { NextResponse } from "next/server";
-import { verifyToken } from "@/utils/jwt";
 
 export function middleware(req) {
   const token = req.cookies.get("token")?.value;
   const url = req.nextUrl;
 
+  // Just check if token exists
   if (!token) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  const user = verifyToken(token);
-  if (!user) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
-
-  // Example: only admin can access /admin route
-  if (url.pathname.startsWith("/admin") && user.role !== "admin") {
-    return NextResponse.redirect(new URL("/", req.url));
-  }
-
-  // You can add more route-specific access here
+  // Skip role checks here — do that in your actual page logic
   return NextResponse.next();
 }
 
